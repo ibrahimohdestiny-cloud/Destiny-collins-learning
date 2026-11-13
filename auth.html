@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Student access | Collins-Academy</title><link rel="stylesheet" href="styles.css"></head>
+<body class="auth-body"><header class="top"><a class="brand" href="index.html"><span class="mark">C</span> COLLINS-ACADEMY</a><a href="index.html">Back to home</a></header>
+<main class="auth-wrap"><section class="auth-card"><p class="eyebrow">WELCOME TO YOUR CLASSROOM</p><h1>Student access</h1><p class="muted">Create an account to begin your 30-day free trial, or sign in to continue learning.</p>
+<div class="tabs"><button type="button" class="tab active" id="signupTab">Create account</button><button type="button" class="tab" id="loginTab">Log in</button></div>
+<form id="signupForm"><label>Full name<input name="fullName" autocomplete="name" required maxlength="80" placeholder="Your full name"></label><label>Email address<input name="email" type="email" autocomplete="email" required placeholder="you@example.com"></label><label>Password<input name="password" type="password" autocomplete="new-password" minlength="8" required placeholder="At least 8 characters"></label><button class="btn wide" type="submit">Create my account</button></form>
+<form id="loginForm" hidden><label>Email address<input name="email" type="email" autocomplete="email" required placeholder="you@example.com"></label><label>Password<input name="password" type="password" autocomplete="current-password" required placeholder="Your password"></label><button class="btn wide" type="submit">Log in</button></form>
+<p class="message" id="message" role="status" aria-live="polite"></p><p class="tiny">By creating an account, you agree to use the academy respectfully. A privacy notice and terms should be published before opening registration to the public.</p></section></main>
+<script type="module" src="auth.js"></script></body></html>
