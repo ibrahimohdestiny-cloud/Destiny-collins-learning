@@ -1,79 +1,64 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Classroom | Collins Academy</title>
 
-  <link
-    rel="stylesheet"
-    href="styles.css"
+  <meta
+    name="description"
+    content="Learn digital skills with Collins Academy."
   >
+
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
+  <!-- Top navigation -->
   <header class="top">
-
-    <a
-      href="dashboard.html"
-      class="brand"
-    >
+    <a href="dashboard.html" class="brand">
       <span class="mark">C</span>
       COLLINS-ACADEMY
     </a>
 
     <a href="dashboard.html">
-      ← Dashboard
+      &larr; Dashboard
     </a>
-
   </header>
 
-
+  <!-- Classroom content -->
   <main class="dash">
 
-    <p class="eyebrow">
-      CLASSROOM
-    </p>
+    <p class="eyebrow">COLLINS ACADEMY CLASSROOM</p>
 
     <h1 id="courseTitle">
       Loading course...
     </h1>
 
-    <p
-      id="courseDescription"
-      class="muted"
-    ></p>
+    <p id="courseDescription" class="muted">
+      Please wait while your course loads.
+    </p>
 
-
-    <div
-      id="lessonList"
-      class="lesson-list"
-    >
+    <!-- Lessons will be displayed here -->
+    <div id="lessonList" class="lesson-list">
+      <p>Loading lessons...</p>
     </div>
 
-
+    <!-- Messages and errors -->
     <p
       id="courseMessage"
       class="message"
+      role="status"
+      aria-live="polite"
     ></p>
 
   </main>
 
-
   <!-- Course JavaScript -->
-
-  <script
-    type="module"
-    src="course.js?v=10"
-  ></script>
+  <script type="module" src="course.js?v=11"></script>
 
 </body>
-
 </html>
