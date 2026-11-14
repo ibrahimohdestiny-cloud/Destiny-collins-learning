@@ -1,24 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Classroom | Collins-Academy</title>
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+</head>
+
 <body>
 
-  <h1 id="testTitle">Lesson Test</h1>
+  <header class="top">
 
-  <button id="testButton" type="button">
-    Start Lesson
-  </button>
+    <a
+      class="brand"
+      href="dashboard.html"
+    >
+      <span class="mark">C</span>
+      COLLINS-ACADEMY
+    </a>
 
-  <div id="lessonArea"></div>
+    <a href="dashboard.html">
+      ← Dashboard
+    </a>
 
-  <script>
-    document
-      .getElementById("testButton")
-      .addEventListener("click", function () {
+  </header>
 
-        document.getElementById("lessonArea").innerHTML = `
-          <h2>Lesson Opened Successfully!</h2>
-          <p>The Start Lesson button is working.</p>
-        `;
 
-      });
-  </script>
+  <main class="dash">
+
+    <p class="eyebrow">
+      CLASSROOM
+    </p>
+
+    <h1 id="courseTitle">
+      Loading course…
+    </h1>
+
+    <p
+      class="muted"
+      id="courseDescription"
+    ></p>
+
+    <div
+      id="lessonList"
+      class="lesson-list"
+    ></div>
+
+    <p
+      id="courseMessage"
+      class="message"
+    ></p>
+
+  </main>
+
+
+  <!-- IMPORTANT:
+       This loads the new JavaScript file.
+  -->
+
+  <script
+    type="module"
+    src="course-v3.js?v=3"
+  ></script>
 
 </body>
+
+</html>
