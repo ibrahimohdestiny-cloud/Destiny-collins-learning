@@ -81,10 +81,6 @@ async function loadCourse() {
     course.description || "";
 
 
-  /* =======================================================
-     LOAD DATABASE LESSONS
-     ======================================================= */
-
   const {
     data: lessons,
     error
@@ -112,10 +108,6 @@ async function loadCourse() {
   lessonList.innerHTML = "";
 
 
-  /* =======================================================
-     USE STARTER LESSONS IF DATABASE IS EMPTY
-     ======================================================= */
-
   if (!lessons || lessons.length === 0) {
 
     message.textContent =
@@ -139,7 +131,7 @@ async function loadCourse() {
 
 
 /* =========================================================
-   CORELDRAW STARTER LESSONS
+   STARTER LESSON DATA
    ========================================================= */
 
 function showStarterLessons() {
@@ -153,10 +145,19 @@ function showStarterLessons() {
         "CorelDRAW Workspace & Interface",
 
       description:
-        "Learn the main parts of the CorelDRAW workspace, including the Toolbox, Property Bar, rulers, dockers and Color Palette.",
+        "Learn the main parts of the CorelDRAW workspace and understand where the most important tools are located.",
 
       video:
         "v-MpITB8nNM",
+
+      steps: [
+        "Open CorelDRAW.",
+        "Locate the Toolbox on the left side.",
+        "Find the Property Bar at the top.",
+        "Find the Color Palette.",
+        "Identify the main page area.",
+        "Practice selecting different tools."
+      ],
 
       exercise:
         "Open CorelDRAW and identify the Toolbox, Property Bar, Color Palette and page area."
@@ -170,10 +171,20 @@ function showStarterLessons() {
         "Shapes & Text",
 
       description:
-        "Learn how to create common shapes, edit them and add text to your designs.",
+        "Learn how to create basic shapes and add text to your CorelDRAW designs.",
 
       video:
         "dehrBWCKxeA",
+
+      steps: [
+        "Open a new CorelDRAW document.",
+        "Select the Rectangle tool.",
+        "Draw a rectangle.",
+        "Create a circle using the Ellipse tool.",
+        "Create a star.",
+        "Select the Text tool.",
+        "Click on the page and type a heading."
+      ],
 
       exercise:
         "Create a rectangle, circle and star. Add a text heading to your design."
@@ -187,10 +198,19 @@ function showStarterLessons() {
         "Colors & Outlines",
 
       description:
-        "Learn how to apply fills, outlines and different colors to objects.",
+        "Learn how to change object colors and apply outlines to your designs.",
 
       video:
         null,
+
+      steps: [
+        "Create three different shapes.",
+        "Select the first shape.",
+        "Choose a color from the Color Palette.",
+        "Change the color of the second shape.",
+        "Change the color of the third shape.",
+        "Apply different outlines to the shapes."
+      ],
 
       exercise:
         "Create three shapes and give each one a different fill and outline."
@@ -204,10 +224,19 @@ function showStarterLessons() {
         "Creating a Simple Logo",
 
       description:
-        "Combine shapes and text to create a clean and simple logo.",
+        "Learn how to combine shapes and text to create a simple logo.",
 
       video:
         null,
+
+      steps: [
+        "Create a new document.",
+        "Draw two or more shapes.",
+        "Choose colors for your shapes.",
+        "Add your logo text.",
+        "Arrange the shapes and text.",
+        "Group the objects when your design is finished."
+      ],
 
       exercise:
         "Create a logo using at least two shapes and one text element."
@@ -221,10 +250,20 @@ function showStarterLessons() {
         "Designing a Flyer",
 
       description:
-        "Combine text, shapes, colors and images to create a simple flyer.",
+        "Learn how to combine text, shapes and colors to create a simple flyer.",
 
       video:
         null,
+
+      steps: [
+        "Create a new page.",
+        "Choose a suitable background.",
+        "Add a large heading.",
+        "Add supporting text.",
+        "Add shapes or graphics.",
+        "Arrange the elements neatly.",
+        "Review your flyer before saving it."
+      ],
 
       exercise:
         "Design a one-page flyer for a school, business or event."
@@ -238,10 +277,21 @@ function showStarterLessons() {
         "Final CorelDRAW Project",
 
       description:
-        "Put everything you have learned together in one complete design.",
+        "Use the skills from the previous lessons to create a complete CorelDRAW project.",
 
       video:
         null,
+
+      steps: [
+        "Create a new CorelDRAW document.",
+        "Plan your design.",
+        "Add your title.",
+        "Create or add a logo.",
+        "Use shapes and colors.",
+        "Add supporting text and graphics.",
+        "Check alignment and spacing.",
+        "Save your finished project."
+      ],
 
       exercise:
         "Create a complete design containing a title, logo, shapes, colors, text and supporting graphics."
@@ -259,19 +309,17 @@ function showStarterLessons() {
 
 
 /* =========================================================
-   DISPLAY STARTER LESSON
+   CREATE STARTER LESSON CARD
    ========================================================= */
 
 function renderStarterLesson(lesson) {
 
-  const article =
+  const card =
     document.createElement("article");
 
-  article.className =
+  card.className =
     "lesson";
 
-
-  /* TITLE */
 
   const title =
     document.createElement("h3");
@@ -279,10 +327,8 @@ function renderStarterLesson(lesson) {
   title.textContent =
     `Lesson ${lesson.number}: ${lesson.title}`;
 
-  article.appendChild(title);
+  card.appendChild(title);
 
-
-  /* DESCRIPTION */
 
   const description =
     document.createElement("p");
@@ -290,52 +336,8 @@ function renderStarterLesson(lesson) {
   description.textContent =
     lesson.description;
 
-  article.appendChild(description);
+  card.appendChild(description);
 
-
-  /* VIDEO */
-
-  if (lesson.video) {
-
-    const videoHeading =
-      document.createElement("h4");
-
-    videoHeading.textContent =
-      "Lesson video";
-
-    article.appendChild(videoHeading);
-
-    addVideo(
-      article,
-      lesson.video,
-      lesson.title
-    );
-  }
-
-
-  /* EXERCISE */
-
-  const exerciseHeading =
-    document.createElement("h4");
-
-  exerciseHeading.textContent =
-    "Practical exercise";
-
-  article.appendChild(
-    exerciseHeading
-  );
-
-
-  const exercise =
-    document.createElement("p");
-
-  exercise.textContent =
-    lesson.exercise;
-
-  article.appendChild(exercise);
-
-
-  /* START BUTTON */
 
   const startButton =
     document.createElement("button");
@@ -351,56 +353,230 @@ function renderStarterLesson(lesson) {
     "click",
     () => {
 
-      startButton.textContent =
-        "Lesson Started ✓";
-
-      startButton.disabled =
-        true;
-
-
-      article.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-
-
-      /* If there is a video,
-         scroll to the video */
-
-      if (lesson.video) {
-
-        const video =
-          article.querySelector(
-            ".video-wrap"
-          );
-
-        if (video) {
-
-          setTimeout(() => {
-
-            video.scrollIntoView({
-              behavior: "smooth",
-              block: "center"
-            });
-
-          }, 300);
-
-        }
-
-      }
+      openStarterLesson(
+        lesson
+      );
 
     }
   );
 
 
-  article.appendChild(
+  card.appendChild(
     startButton
   );
 
 
   lessonList.appendChild(
-    article
+    card
   );
+}
+
+
+/* =========================================================
+   OPEN STARTER LESSON
+   ========================================================= */
+
+function openStarterLesson(lesson) {
+
+  lessonList.innerHTML = "";
+
+
+  const lessonPage =
+    document.createElement("article");
+
+  lessonPage.className =
+    "lesson";
+
+
+  /* TITLE */
+
+  const title =
+    document.createElement("h2");
+
+  title.textContent =
+    `Lesson ${lesson.number}: ${lesson.title}`;
+
+  lessonPage.appendChild(title);
+
+
+  /* DESCRIPTION */
+
+  const description =
+    document.createElement("p");
+
+  description.textContent =
+    lesson.description;
+
+  lessonPage.appendChild(
+    description
+  );
+
+
+  /* VIDEO */
+
+  if (lesson.video) {
+
+    const heading =
+      document.createElement("h4");
+
+    heading.textContent =
+      "Lesson Video";
+
+    lessonPage.appendChild(
+      heading
+    );
+
+    addVideo(
+      lessonPage,
+      lesson.video,
+      lesson.title
+    );
+  }
+
+
+  /* LESSON STEPS */
+
+  const stepsHeading =
+    document.createElement("h4");
+
+  stepsHeading.textContent =
+    "What to do";
+
+  lessonPage.appendChild(
+    stepsHeading
+  );
+
+
+  const steps =
+    document.createElement("ol");
+
+
+  lesson.steps.forEach(
+    (step) => {
+
+      const item =
+        document.createElement("li");
+
+      item.textContent =
+        step;
+
+      item.style.marginBottom =
+        "10px";
+
+      steps.appendChild(
+        item
+      );
+
+    }
+  );
+
+
+  lessonPage.appendChild(
+    steps
+  );
+
+
+  /* EXERCISE */
+
+  const exerciseHeading =
+    document.createElement("h4");
+
+  exerciseHeading.textContent =
+    "Practical Exercise";
+
+  lessonPage.appendChild(
+    exerciseHeading
+  );
+
+
+  const exercise =
+    document.createElement("p");
+
+  exercise.textContent =
+    lesson.exercise;
+
+  lessonPage.appendChild(
+    exercise
+  );
+
+
+  /* COMPLETE BUTTON */
+
+  const completeButton =
+    document.createElement("button");
+
+  completeButton.className =
+    "btn small";
+
+  completeButton.textContent =
+    "Complete Lesson";
+
+
+  completeButton.addEventListener(
+    "click",
+    () => {
+
+      completeButton.textContent =
+        "Lesson Completed ✓";
+
+      completeButton.disabled =
+        true;
+
+    }
+  );
+
+
+  lessonPage.appendChild(
+    completeButton
+  );
+
+
+  /* BACK BUTTON */
+
+  const backButton =
+    document.createElement("button");
+
+  backButton.className =
+    "btn small secondary";
+
+  backButton.textContent =
+    "← Back to Lessons";
+
+  backButton.style.marginLeft =
+    "10px";
+
+
+  backButton.addEventListener(
+    "click",
+    () => {
+
+      lessonList.innerHTML = "";
+
+      showStarterLessons();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+  );
+
+
+  lessonPage.appendChild(
+    backButton
+  );
+
+
+  lessonList.appendChild(
+    lessonPage
+  );
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
 
@@ -408,14 +584,12 @@ function renderStarterLesson(lesson) {
    DATABASE LESSON
    ========================================================= */
 
-function renderDatabaseLesson(
-  lesson
-) {
+function renderDatabaseLesson(lesson) {
 
-  const article =
+  const card =
     document.createElement("article");
 
-  article.className =
+  card.className =
     "lesson";
 
 
@@ -425,7 +599,7 @@ function renderDatabaseLesson(
   title.textContent =
     lesson.title;
 
-  article.appendChild(title);
+  card.appendChild(title);
 
 
   const body =
@@ -435,22 +609,8 @@ function renderDatabaseLesson(
     lesson.body ||
     "Lesson content will be added soon.";
 
-  article.appendChild(body);
+  card.appendChild(body);
 
-
-  /* VIDEO */
-
-  if (lesson.video_id) {
-
-    addVideo(
-      article,
-      lesson.video_id,
-      lesson.title
-    );
-  }
-
-
-  /* START BUTTON */
 
   const startButton =
     document.createElement("button");
@@ -464,39 +624,44 @@ function renderDatabaseLesson(
 
   startButton.addEventListener(
     "click",
-    async () => {
+    () => {
 
-      startButton.disabled =
-        true;
-
-      startButton.textContent =
-        "Started ✓";
-
-
-      article.scrollIntoView({
+      card.scrollIntoView({
         behavior: "smooth",
         block: "start"
       });
+
+      startButton.textContent =
+        "Lesson Started ✓";
 
     }
   );
 
 
-  article.appendChild(
+  card.appendChild(
     startButton
   );
 
 
-  /* COMPLETION BUTTON */
+  if (lesson.video_id) {
+
+    addVideo(
+      card,
+      lesson.video_id,
+      lesson.title
+    );
+
+  }
+
 
   addCompletedButton(
-    article,
+    card,
     lesson.id
   );
 
 
   lessonList.appendChild(
-    article
+    card
   );
 }
 
@@ -554,7 +719,7 @@ function addVideo(
 
 
 /* =========================================================
-   MARK DATABASE LESSON COMPLETE
+   DATABASE COMPLETION
    ========================================================= */
 
 function addCompletedButton(
@@ -589,9 +754,11 @@ function addCompletedButton(
         .from("lesson_progress")
         .upsert(
           {
-            user_id: user.id,
+            user_id:
+              user.id,
 
-            lesson_id: lessonId
+            lesson_id:
+              lessonId
           },
           {
             onConflict:
