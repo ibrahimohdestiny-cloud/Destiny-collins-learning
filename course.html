@@ -1,2 +1,24 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Classroom | Collins-Academy</title><link rel="stylesheet" href="styles.css"></head><body><header class="top"><a class="brand" href="dashboard.html"><span class="mark">C</span> COLLINS-ACADEMY</a><a href="dashboard.html">← Dashboard</a></header><main class="dash"><p class="eyebrow">CLASSROOM</p><h1 id="courseTitle">Loading course…</h1><p class="muted" id="courseDescription"></p><div id="lessonList" class="lesson-list"></div><p id="courseMessage" class="message"></p></main><script type="module" src="course-v3.js"></script></body></html>
+<body>
+
+  <h1 id="testTitle">Lesson Test</h1>
+
+  <button id="testButton" type="button">
+    Start Lesson
+  </button>
+
+  <div id="lessonArea"></div>
+
+  <script>
+    document
+      .getElementById("testButton")
+      .addEventListener("click", function () {
+
+        document.getElementById("lessonArea").innerHTML = `
+          <h2>Lesson Opened Successfully!</h2>
+          <p>The Start Lesson button is working.</p>
+        `;
+
+      });
+  </script>
+
+</body>
