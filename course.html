@@ -2,11 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Classroom | Collins Academy</title>
 
@@ -20,9 +16,7 @@
 
 <body>
 
-  <!-- Navigation -->
   <header class="top">
-
     <a href="dashboard.html" class="brand">
       <span class="mark">C</span>
       COLLINS-ACADEMY
@@ -31,42 +25,22 @@
     <a href="dashboard.html">
       ← Dashboard
     </a>
-
   </header>
 
-
-  <!-- Classroom -->
   <main class="dash">
 
-    <p class="eyebrow">
-      COLLINS ACADEMY CLASSROOM
-    </p>
+    <p class="eyebrow">CLASSROOM</p>
 
-    <h1 id="courseTitle">
-      Loading course...
-    </h1>
+    <h1 id="courseTitle">Loading course...</h1>
 
-    <p
-      id="courseDescription"
-      class="muted"
-    >
+    <p id="courseDescription" class="muted">
       Loading course information...
     </p>
 
+    <div id="lessonList" class="lesson-list">
+      <p>Loading lessons...</p>
+    </div>
 
-    <!-- Lessons -->
-    <section
-      id="lessonList"
-      class="lesson-list"
-      aria-live="polite"
-    >
-      <p>
-        Loading lessons...
-      </p>
-    </section>
-
-
-    <!-- Messages -->
     <p
       id="courseMessage"
       class="message"
@@ -76,11 +50,10 @@
 
   </main>
 
-
-  <!-- Classroom JavaScript -->
+  <!-- Load the latest classroom JavaScript -->
   <script
     type="module"
-    src="course.js?v=12"
+    src="course.js?v=13"
   ></script>
 
 </body>
