@@ -12,195 +12,116 @@ const supabase = createClient(
 
 const signupForm = document.getElementById("signupForm");
 const loginForm = document.getElementById("loginForm");
-
 const signupTab = document.getElementById("signupTab");
 const loginTab = document.getElementById("loginTab");
-
 const message = document.getElementById("message");
 
-
-/* =========================
-   SWITCH BETWEEN SIGNUP
-   AND LOGIN
-========================= */
+function showMessage(text) {
+  message.textContent = text;
+}
 
 function showMode(mode) {
-
   const isSignup = mode === "signup";
 
   signupForm.hidden = !isSignup;
   loginForm.hidden = isSignup;
 
-  signupTab.classList.toggle(
-    "active",
-    isSignup
-  );
+  signupTab.classList.toggle("active", isSignup);
+  loginTab.classList.toggle("active", !isSignup);
 
-  loginTab.classList.toggle(
-    "active",
-    !isSignup
-  );
-
-  message.textContent = "";
+  showMessage("");
 }
 
+signupTab.addEventListener("click", () => {
+  showMode("signup");
+});
 
-/* =========================
-   TAB BUTTONS
-========================= */
-
-signupTab.addEventListener(
-  "click",
-  () => showMode("signup")
-);
-
-loginTab.addEventListener(
-  "click",
-  () => showMode("login")
-);
+loginTab.addEventListener("click", () => {
+  showMode("login");
+});
 
 
-/* =========================
-   CREATE ACCOUNT
-========================= */
+/* CREATE ACCOUNT */
+signupForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-signupForm.addEventListener(
-  "submit",
-  async (event) => {
+  showMessage("Creating your account...");
 
-    event.preventDefault();
+  const formData = new FormData(signupForm);
 
-    message.textContent =
-      "Creating your account...";
+  const fullName = formData.get("fullName")?.trim();
+  const email = formData.get("email")?.trim();
+  const password = formData.get("password");
 
-    const formData =
-      new FormData(signupForm);
+  if (!fullName || !email || !password) {
+    showMessage("Please fill in all fields.");
+    return;
+  }
 
-    const fullName =
-      formData.get("fullName").trim();
-
-    const email =
-      formData.get("email").trim();
-
-    const password =
-      formData.get("password");
-
-
-    const {
-      data,
-      error
-    } = await supabase.auth.signUp({
-
-      email,
-
-      password,
-
-      options: {
-        data: {
-          full_name: fullName
-        }
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        full_name: fullName
       }
-
-    });
-
-
-    if (error) {
-
-      console.error(error);
-
-      message.textContent =
-        error.message;
-
-      return;
     }
+  });
 
-
-    if (data.session) {
-
-      window.location.href =
-        "dashboard.html";
-
-      return;
-    }
-
-
-    message.textContent =
-      "Account created. You can now log in.";
+  if (error) {
+    console.error(error);
+    showMessage(error.message);
+    return;
   }
-);
+
+  if (data.session) {
+    window.location.href = "dashboard.html";
+    return;
+  }
+
+  showMessage(
+    "Account created successfully. You can now log in."
+  );
+
+  signupForm.reset();
+  showMode("login");
+});
 
 
-/* =========================
-   LOGIN
-========================= */
+/* LOGIN */
+loginForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-loginForm.addEventListener(
-  "submit",
-  async (event) => {
+  showMessage("Signing in...");
 
-    event.preventDefault();
+  const formData = new FormData(loginForm);
 
-    message.textContent =
-      "Signing in...";
+  const email = formData.get("email")?.trim();
+  const password = formData.get("password");
 
-    const formData =
-      new FormData(loginForm);
+  if (!email || !password) {
+    showMessage("Please enter your email and password.");
+    return;
+  }
 
-    const email =
-      formData.get("email").trim();
-
-    const password =
-      formData.get("password");
-
-
-    if (!email || !password) {
-
-      message.textContent =
-        "Please enter your email and password.";
-
-      return;
-    }
-
-
-    const {
-      data,
-      error
-    } = await supabase.auth.signInWithPassword({
-
+  const { data, error } =
+    await supabase.auth.signInWithPassword({
       email,
-
       password
-
     });
 
-
-    if (error) {
-
-      console.error(
-        "LOGIN ERROR:",
-        error
-      );
-
-      message.textContent =
-        error.message;
-
-      return;
-    }
-
-
-    if (data.session) {
-
-      message.textContent =
-        "Login successful. Opening dashboard...";
-
-      window.location.href =
-        "dashboard.html";
-
-      return;
-    }
-
-
-    message.textContent =
-      "Login was not completed. Please try again.";
+  if (error) {
+    console.error(error);
+    showMessage(error.message);
+    return;
   }
-);
+
+  if (!data.user) {
+    showMessage("Login failed. Please try again.");
+    return;
+  }
+
+  showMessage("Login successful. Opening classroom...");
+
+  window.location.href = "dashboard.html";
+});
