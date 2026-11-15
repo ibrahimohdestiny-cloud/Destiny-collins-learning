@@ -1,34 +1,206 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from "./config.js";
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+import {
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+} from "./config.js";
+
+const supabase = createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
 const signupForm = document.getElementById("signupForm");
 const loginForm = document.getElementById("loginForm");
-const message = document.getElementById("message");
+
 const signupTab = document.getElementById("signupTab");
 const loginTab = document.getElementById("loginTab");
+
+const message = document.getElementById("message");
+
+
+/* =========================
+   SWITCH BETWEEN SIGNUP
+   AND LOGIN
+========================= */
+
 function showMode(mode) {
-  const signup = mode === "signup";
-  signupForm.hidden = !signup; loginForm.hidden = signup;
-  signupTab.classList.toggle("active", signup); loginTab.classList.toggle("active", !signup);
+
+  const isSignup = mode === "signup";
+
+  signupForm.hidden = !isSignup;
+  loginForm.hidden = isSignup;
+
+  signupTab.classList.toggle(
+    "active",
+    isSignup
+  );
+
+  loginTab.classList.toggle(
+    "active",
+    !isSignup
+  );
+
   message.textContent = "";
 }
-signupTab.addEventListener("click", () => showMode("signup"));
-loginTab.addEventListener("click", () => showMode("login"));
-signupForm.addEventListener("submit", async (event) => {
-  event.preventDefault(); message.textContent = "Creating your account…";
-  const data = new FormData(signupForm);
-  const { data: result, error } = await supabase.auth.signUp({
-    email: data.get("email").trim(), password: data.get("password"),
-    options: { data: { full_name: data.get("fullName").trim() } }
-  });
-  if (error) { message.textContent = error.message; return; }
-  if (result.session) location.href = "dashboard.html";
-  else message.textContent = "Account created. Check your email for the confirmation link, then return here to log in.";
-});
-loginForm.addEventListener("submit", async (event) => {
-  event.preventDefault(); message.textContent = "Signing in…";
-  const data = new FormData(loginForm);
-  const { error } = await supabase.auth.signInWithPassword({ email: data.get("email").trim(), password: data.get("password") });
-  if (error) { message.textContent = error.message; return; }
-  location.href = "dashboard.html";
-});
+
+
+/* =========================
+   TAB BUTTONS
+========================= */
+
+signupTab.addEventListener(
+  "click",
+  () => showMode("signup")
+);
+
+loginTab.addEventListener(
+  "click",
+  () => showMode("login")
+);
+
+
+/* =========================
+   CREATE ACCOUNT
+========================= */
+
+signupForm.addEventListener(
+  "submit",
+  async (event) => {
+
+    event.preventDefault();
+
+    message.textContent =
+      "Creating your account...";
+
+    const formData =
+      new FormData(signupForm);
+
+    const fullName =
+      formData.get("fullName").trim();
+
+    const email =
+      formData.get("email").trim();
+
+    const password =
+      formData.get("password");
+
+
+    const {
+      data,
+      error
+    } = await supabase.auth.signUp({
+
+      email,
+
+      password,
+
+      options: {
+        data: {
+          full_name: fullName
+        }
+      }
+
+    });
+
+
+    if (error) {
+
+      console.error(error);
+
+      message.textContent =
+        error.message;
+
+      return;
+    }
+
+
+    if (data.session) {
+
+      window.location.href =
+        "dashboard.html";
+
+      return;
+    }
+
+
+    message.textContent =
+      "Account created. You can now log in.";
+  }
+);
+
+
+/* =========================
+   LOGIN
+========================= */
+
+loginForm.addEventListener(
+  "submit",
+  async (event) => {
+
+    event.preventDefault();
+
+    message.textContent =
+      "Signing in...";
+
+    const formData =
+      new FormData(loginForm);
+
+    const email =
+      formData.get("email").trim();
+
+    const password =
+      formData.get("password");
+
+
+    if (!email || !password) {
+
+      message.textContent =
+        "Please enter your email and password.";
+
+      return;
+    }
+
+
+    const {
+      data,
+      error
+    } = await supabase.auth.signInWithPassword({
+
+      email,
+
+      password
+
+    });
+
+
+    if (error) {
+
+      console.error(
+        "LOGIN ERROR:",
+        error
+      );
+
+      message.textContent =
+        error.message;
+
+      return;
+    }
+
+
+    if (data.session) {
+
+      message.textContent =
+        "Login successful. Opening dashboard...";
+
+      window.location.href =
+        "dashboard.html";
+
+      return;
+    }
+
+
+    message.textContent =
+      "Login was not completed. Please try again.";
+  }
+);
