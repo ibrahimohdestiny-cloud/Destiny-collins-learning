@@ -1,9 +1,211 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Student access | Collins-Academy</title><link rel="stylesheet" href="styles.css"></head>
-<body class="auth-body"><header class="top"><a class="brand" href="index.html"><span class="mark">C</span> COLLINS-ACADEMY</a><a href="index.html">Back to home</a></header>
-<main class="auth-wrap"><section class="auth-card"><p class="eyebrow">WELCOME TO YOUR CLASSROOM</p><h1>Student access</h1><p class="muted">Create an account to begin your 30-day free trial, or sign in to continue learning.</p>
-<div class="tabs"><button type="button" class="tab active" id="signupTab">Create account</button><button type="button" class="tab" id="loginTab">Log in</button></div>
-<form id="signupForm"><label>Full name<input name="fullName" autocomplete="name" required maxlength="80" placeholder="Your full name"></label><label>Email address<input name="email" type="email" autocomplete="email" required placeholder="you@example.com"></label><label>Password<input name="password" type="password" autocomplete="new-password" minlength="8" required placeholder="At least 8 characters"></label><button class="btn wide" type="submit">Create my account</button></form>
-<form id="loginForm" hidden><label>Email address<input name="email" type="email" autocomplete="email" required placeholder="you@example.com"></label><label>Password<input name="password" type="password" autocomplete="current-password" required placeholder="Your password"></label><button class="btn wide" type="submit">Log in</button></form>
-<p class="message" id="message" role="status" aria-live="polite"></p><p class="tiny">By creating an account, you agree to use the academy respectfully. A privacy notice and terms should be published before opening registration to the public.</p></section></main>
-<script type="module" src="auth.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Student Login | Collins Academy</title>
+
+  <meta
+    name="description"
+    content="Log in to your Collins Academy classroom."
+  >
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="auth-body">
+
+  <header class="top">
+
+    <a href="index.html" class="brand">
+      <span class="mark">C</span>
+      COLLINS-ACADEMY
+    </a>
+
+    <a href="index.html">
+      ← Home
+    </a>
+
+  </header>
+
+
+  <main class="auth-wrap">
+
+    <section class="auth-card">
+
+      <p class="eyebrow">
+        COLLINS ACADEMY
+      </p>
+
+      <h1>Student Access</h1>
+
+      <p class="muted">
+        Log in to continue learning or create a new student account.
+      </p>
+
+
+      <!-- TABS -->
+
+      <div class="tabs">
+
+        <button
+          type="button"
+          class="tab"
+          id="loginTab"
+        >
+          Log in
+        </button>
+
+        <button
+          type="button"
+          class="tab active"
+          id="signupTab"
+        >
+          Create account
+        </button>
+
+      </div>
+
+
+      <!-- LOGIN FORM -->
+
+      <form id="loginForm" hidden>
+
+        <label for="loginEmail">
+          Email address
+
+          <input
+            id="loginEmail"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            placeholder="you@example.com"
+          >
+
+        </label>
+
+
+        <label for="loginPassword">
+          Password
+
+          <input
+            id="loginPassword"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+            placeholder="Your password"
+          >
+
+        </label>
+
+
+        <button
+          class="btn wide"
+          type="submit"
+          id="loginButton"
+        >
+          Log in
+        </button>
+
+      </form>
+
+
+      <!-- SIGNUP FORM -->
+
+      <form id="signupForm">
+
+        <label for="fullName">
+          Full name
+
+          <input
+            id="fullName"
+            name="fullName"
+            type="text"
+            autocomplete="name"
+            maxlength="80"
+            required
+            placeholder="Your full name"
+          >
+
+        </label>
+
+
+        <label for="signupEmail">
+          Email address
+
+          <input
+            id="signupEmail"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            placeholder="you@example.com"
+          >
+
+        </label>
+
+
+        <label for="signupPassword">
+          Password
+
+          <input
+            id="signupPassword"
+            name="password"
+            type="password"
+            autocomplete="new-password"
+            minlength="8"
+            required
+            placeholder="At least 8 characters"
+          >
+
+        </label>
+
+
+        <button
+          class="btn wide"
+          type="submit"
+          id="signupButton"
+        >
+          Create my account
+        </button>
+
+      </form>
+
+
+      <!-- MESSAGE -->
+
+      <p
+        class="message"
+        id="message"
+        role="status"
+        aria-live="polite"
+      ></p>
+
+
+      <p class="tiny">
+        By using Collins Academy, you agree to use the classroom
+        respectfully and responsibly.
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <!-- IMPORTANT: cache-busting version -->
+
+  <script
+    type="module"
+    src="auth.js?v=4"
+  ></script>
+
+</body>
+
+</html>
