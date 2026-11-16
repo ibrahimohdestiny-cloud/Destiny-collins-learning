@@ -1,9 +1,184 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>My classroom | Collins-Academy</title><link rel="stylesheet" href="styles.css"></head>
-<body><header class="top"><a class="brand" href="index.html"><span class="mark">C</span> COLLINS-ACADEMY</a><button id="logout" class="btn small secondary">Log out</button></header>
-<main class="dash"><div class="dash-head"><div><p class="eyebrow">STUDENT DASHBOARD</p><h1>Welcome, <span id="studentName">student</span>.</h1><p class="muted">Choose a classroom and keep building your skills.</p></div><div class="trial-box"><span>YOUR FREE TRIAL</span><strong id="trialStatus">Checking…</strong><small id="trialDate"></small></div></div>
-<div id="lockedNotice" class="notice" hidden>Your free trial has ended. Your lessons are currently locked. Subscription setup will be added in the next stage.</div>
-<h2 class="dash-title">Your classrooms</h2><div id="courseGrid" class="grid"><p>Loading your courses…</p></div>
-<section class="progress-panel"><h2>Your learning progress</h2><p id="progressText" class="muted">Loading progress…</p><div class="progress-track"><div id="progressBar"></div></div></section>
-<p class="tiny">Your account and learning access are managed securely by the academy database.</p></main>
-<script type="module" src="dashboard.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Student Dashboard | Collins Academy</title>
+
+  <meta
+    name="description"
+    content="Collins Academy student dashboard."
+  >
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+</head>
+
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="top">
+
+    <a
+      href="index.html"
+      class="brand"
+    >
+      <span class="mark">C</span>
+      COLLINS-ACADEMY
+    </a>
+
+
+    <button
+      id="logout"
+      class="btn small secondary"
+      type="button"
+    >
+      Log out
+    </button>
+
+  </header>
+
+
+  <!-- MAIN DASHBOARD -->
+
+  <main class="dash">
+
+    <section class="dash-head">
+
+      <div>
+
+        <p class="eyebrow">
+          STUDENT DASHBOARD
+        </p>
+
+        <h1>
+          Welcome,
+          <span id="studentName">
+            student
+          </span>.
+        </h1>
+
+        <p class="muted">
+          Choose a classroom and keep building your skills.
+        </p>
+
+      </div>
+
+
+      <!-- TRIAL -->
+
+      <div class="trial-box">
+
+        <span>
+          YOUR FREE TRIAL
+        </span>
+
+        <strong id="trialStatus">
+          Checking...
+        </strong>
+
+        <small id="trialDate">
+          Please wait...
+        </small>
+
+      </div>
+
+    </section>
+
+
+    <!-- LOCKED NOTICE -->
+
+    <div
+      id="lockedNotice"
+      class="notice"
+      hidden
+    >
+      Your free trial has ended.
+      Your lessons are currently locked.
+      Subscription setup will be added in the next stage.
+    </div>
+
+
+    <!-- CLASSROOMS -->
+
+    <section>
+
+      <p class="eyebrow">
+        LEARNING
+      </p>
+
+      <h2 class="dash-title">
+        Your classrooms
+      </h2>
+
+
+      <div
+        id="courseGrid"
+        class="grid"
+      >
+
+        <p>
+          Loading your courses...
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROGRESS -->
+
+    <section class="progress-panel">
+
+      <h2>
+        Your learning progress
+      </h2>
+
+      <p
+        id="progressText"
+        class="muted"
+      >
+        Loading progress...
+      </p>
+
+
+      <div class="progress-track">
+
+        <div
+          id="progressBar"
+          style="width: 0%;"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+    <p class="tiny">
+      Your account and learning access are managed securely
+      by the academy database.
+    </p>
+
+  </main>
+
+
+  <!-- DASHBOARD JAVASCRIPT -->
+
+  <script
+    type="module"
+    src="dashboard.js?v=10"
+  ></script>
+
+</body>
+
+</html>
