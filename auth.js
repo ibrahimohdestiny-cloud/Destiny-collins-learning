@@ -3,14 +3,12 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import {
   SUPABASE_URL,
   SUPABASE_ANON_KEY
-} from "./config.js";
-
+} from "./config.js?v=2";
 
 const supabase = createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
-
 
 const loginForm = document.getElementById("loginForm");
 const signupForm = document.getElementById("signupForm");
@@ -19,22 +17,18 @@ const loginTab = document.getElementById("loginTab");
 const signupTab = document.getElementById("signupTab");
 
 const message = document.getElementById("message");
-
 const loginButton = document.getElementById("loginButton");
 const signupButton = document.getElementById("signupButton");
 
-
-/* MESSAGE */
 
 function showMessage(text) {
   message.textContent = text;
 }
 
 
-/* LOGIN / SIGNUP TABS */
+/* LOGIN TAB */
 
-function showLogin() {
-
+loginTab.addEventListener("click", function () {
   loginForm.hidden = false;
   signupForm.hidden = true;
 
@@ -42,11 +36,12 @@ function showLogin() {
   signupTab.classList.remove("active");
 
   showMessage("");
-}
+});
 
 
-function showSignup() {
+/* SIGNUP TAB */
 
+signupTab.addEventListener("click", function () {
   loginForm.hidden = true;
   signupForm.hidden = false;
 
@@ -54,12 +49,7 @@ function showSignup() {
   signupTab.classList.add("active");
 
   showMessage("");
-}
-
-
-loginTab.addEventListener("click", showLogin);
-
-signupTab.addEventListener("click", showSignup);
+});
 
 
 /* LOGIN */
@@ -67,12 +57,12 @@ signupTab.addEventListener("click", showSignup);
 loginForm.addEventListener("submit", async function (event) {
 
   event.preventDefault();
+  event.stopPropagation();
 
   loginButton.disabled = true;
   loginButton.textContent = "Logging in...";
 
   showMessage("Signing in...");
-
 
   const email = document
     .getElementById("loginEmail")
@@ -83,21 +73,19 @@ loginForm.addEventListener("submit", async function (event) {
     .getElementById("loginPassword")
     .value;
 
-
   try {
 
-    const result = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password
-    });
+    const { data, error } =
+      await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
 
-
-    if (result.error) {
-
-      console.error(result.error);
+    if (error) {
+      console.error("LOGIN ERROR:", error);
 
       showMessage(
-        "Login failed: " + result.error.message
+        "Login failed: " + error.message
       );
 
       loginButton.disabled = false;
@@ -106,8 +94,7 @@ loginForm.addEventListener("submit", async function (event) {
       return;
     }
 
-
-    if (!result.data || !result.data.user) {
+    if (!data || !data.user) {
 
       showMessage(
         "Login failed. Please try again."
@@ -119,26 +106,23 @@ loginForm.addEventListener("submit", async function (event) {
       return;
     }
 
-
     showMessage(
       "Login successful. Opening dashboard..."
     );
 
-
-    window.location.href = "dashboard.html";
+    window.location.assign("dashboard.html");
 
   } catch (error) {
 
-    console.error(error);
+    console.error("LOGIN CONNECTION ERROR:", error);
 
     showMessage(
-      "Connection error. Please try again."
+      "Connection error: " + error.message
     );
 
     loginButton.disabled = false;
     loginButton.textContent = "Log in";
   }
-
 });
 
 
@@ -147,12 +131,12 @@ loginForm.addEventListener("submit", async function (event) {
 signupForm.addEventListener("submit", async function (event) {
 
   event.preventDefault();
+  event.stopPropagation();
 
   signupButton.disabled = true;
   signupButton.textContent = "Creating account...";
 
   showMessage("Creating your account...");
-
 
   const fullName = document
     .getElementById("fullName")
@@ -168,30 +152,25 @@ signupForm.addEventListener("submit", async function (event) {
     .getElementById("signupPassword")
     .value;
 
-
   try {
 
-    const result = await supabase.auth.signUp({
-
-      email: email,
-
-      password: password,
-
-      options: {
-        data: {
-          full_name: fullName
+    const { data, error } =
+      await supabase.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            full_name: fullName
+          }
         }
-      }
+      });
 
-    });
+    if (error) {
 
-
-    if (result.error) {
-
-      console.error(result.error);
+      console.error("SIGNUP ERROR:", error);
 
       showMessage(
-        "Account error: " + result.error.message
+        "Account error: " + error.message
       );
 
       signupButton.disabled = false;
@@ -200,41 +179,33 @@ signupForm.addEventListener("submit", async function (event) {
       return;
     }
 
-
-    if (result.data.session) {
-
-      showMessage(
-        "Account created. Opening dashboard..."
-      );
-
-      window.location.href = "dashboard.html";
-
+    if (data.session) {
+      window.location.assign("dashboard.html");
       return;
     }
-
 
     showMessage(
       "Account created. You can now log in."
     );
 
-
     signupForm.reset();
 
-    showLogin();
+    loginForm.hidden = false;
+    signupForm.hidden = true;
 
+    loginTab.classList.add("active");
+    signupTab.classList.remove("active");
 
   } catch (error) {
 
-    console.error(error);
+    console.error("SIGNUP ERROR:", error);
 
     showMessage(
-      "Connection error. Please try again."
+      "Connection error: " + error.message
     );
 
   }
 
-
   signupButton.disabled = false;
   signupButton.textContent = "Create my account";
-
 });
