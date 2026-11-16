@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Student Access | Collins Academy</title>
+  <title>Student Login | Collins Academy</title>
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -19,9 +19,7 @@
       COLLINS-ACADEMY
     </a>
 
-    <a href="index.html">
-      ← Home
-    </a>
+    <a href="index.html">← Home</a>
 
   </header>
 
@@ -30,14 +28,12 @@
 
     <section class="auth-card">
 
-      <p class="eyebrow">
-        COLLINS ACADEMY
-      </p>
+      <p class="eyebrow">COLLINS ACADEMY</p>
 
       <h1>Student Access</h1>
 
       <p class="muted">
-        Log in to continue learning or create your student account.
+        Log in to continue learning or create a new student account.
       </p>
 
 
@@ -62,11 +58,11 @@
       </div>
 
 
-      <!-- LOGIN -->
+      <!-- LOGIN FORM -->
 
       <form id="loginForm">
 
-        <label for="loginEmail">
+        <label>
           Email address
 
           <input
@@ -77,10 +73,11 @@
             required
             placeholder="you@example.com"
           >
+
         </label>
 
 
-        <label for="loginPassword">
+        <label>
           Password
 
           <input
@@ -91,6 +88,7 @@
             required
             placeholder="Your password"
           >
+
         </label>
 
 
@@ -105,40 +103,40 @@
       </form>
 
 
-      <!-- SIGN UP -->
+      <!-- CREATE ACCOUNT FORM -->
 
       <form id="signupForm" hidden>
 
-        <label for="fullName">
+        <label>
           Full name
 
           <input
             id="fullName"
             name="fullName"
             type="text"
-            maxlength="80"
-            autocomplete="name"
             required
+            maxlength="80"
             placeholder="Your full name"
           >
+
         </label>
 
 
-        <label for="signupEmail">
+        <label>
           Email address
 
           <input
             id="signupEmail"
             name="email"
             type="email"
-            autocomplete="email"
             required
             placeholder="you@example.com"
           >
+
         </label>
 
 
-        <label for="signupPassword">
+        <label>
           Password
 
           <input
@@ -146,10 +144,10 @@
             name="password"
             type="password"
             minlength="8"
-            autocomplete="new-password"
             required
             placeholder="At least 8 characters"
           >
+
         </label>
 
 
@@ -173,7 +171,7 @@
 
 
       <p class="tiny">
-        Use your own account details to access the Collins Academy classroom.
+        Welcome to Collins Academy.
       </p>
 
     </section>
@@ -183,7 +181,7 @@
 
   <script
     type="module"
-    src="auth.js?v=10"
+    src="auth.js?v=11"
   ></script>
 
 </body>
