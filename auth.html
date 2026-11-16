@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Student Login | Collins Academy</title>
+  <meta
+    name="description"
+    content="Log in to Collins Academy and continue learning digital skills."
+  >
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -13,16 +16,13 @@
 <body class="auth-body">
 
   <header class="top">
-
     <a href="index.html" class="brand">
       <span class="mark">C</span>
       COLLINS-ACADEMY
     </a>
 
     <a href="index.html">← Home</a>
-
   </header>
-
 
   <main class="auth-wrap">
 
@@ -35,7 +35,6 @@
       <p class="muted">
         Log in to continue learning or create a new student account.
       </p>
-
 
       <div class="tabs">
 
@@ -60,9 +59,9 @@
 
       <!-- LOGIN FORM -->
 
-      <form id="loginForm">
+      <form id="loginForm" novalidate>
 
-        <label>
+        <label for="loginEmail">
           Email address
 
           <input
@@ -73,11 +72,10 @@
             required
             placeholder="you@example.com"
           >
-
         </label>
 
 
-        <label>
+        <label for="loginPassword">
           Password
 
           <input
@@ -88,7 +86,6 @@
             required
             placeholder="Your password"
           >
-
         </label>
 
 
@@ -103,51 +100,51 @@
       </form>
 
 
-      <!-- CREATE ACCOUNT FORM -->
+      <!-- SIGNUP FORM -->
 
-      <form id="signupForm" hidden>
+      <form id="signupForm" hidden novalidate>
 
-        <label>
+        <label for="fullName">
           Full name
 
           <input
             id="fullName"
             name="fullName"
             type="text"
-            required
+            autocomplete="name"
             maxlength="80"
+            required
             placeholder="Your full name"
           >
-
         </label>
 
 
-        <label>
+        <label for="signupEmail">
           Email address
 
           <input
             id="signupEmail"
             name="email"
             type="email"
+            autocomplete="email"
             required
             placeholder="you@example.com"
           >
-
         </label>
 
 
-        <label>
+        <label for="signupPassword">
           Password
 
           <input
             id="signupPassword"
             name="password"
             type="password"
+            autocomplete="new-password"
             minlength="8"
             required
             placeholder="At least 8 characters"
           >
-
         </label>
 
 
@@ -179,11 +176,11 @@
   </main>
 
 
+  <!-- Supabase login logic -->
   <script
     type="module"
-    src="auth.js?v=11"
+    src="auth.js?v=20"
   ></script>
 
 </body>
-
 </html>
