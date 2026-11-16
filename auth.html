@@ -3,17 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Student Login | Collins Academy</title>
-
-  <meta
-    name="description"
-    content="Log in to your Collins Academy classroom."
-  >
+  <title>Student Access | Collins Academy</title>
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -45,17 +37,15 @@
       <h1>Student Access</h1>
 
       <p class="muted">
-        Log in to continue learning or create a new student account.
+        Log in to continue learning or create your student account.
       </p>
 
-
-      <!-- TABS -->
 
       <div class="tabs">
 
         <button
           type="button"
-          class="tab"
+          class="tab active"
           id="loginTab"
         >
           Log in
@@ -63,7 +53,7 @@
 
         <button
           type="button"
-          class="tab active"
+          class="tab"
           id="signupTab"
         >
           Create account
@@ -72,9 +62,9 @@
       </div>
 
 
-      <!-- LOGIN FORM -->
+      <!-- LOGIN -->
 
-      <form id="loginForm" hidden>
+      <form id="loginForm">
 
         <label for="loginEmail">
           Email address
@@ -87,7 +77,6 @@
             required
             placeholder="you@example.com"
           >
-
         </label>
 
 
@@ -102,7 +91,6 @@
             required
             placeholder="Your password"
           >
-
         </label>
 
 
@@ -117,9 +105,9 @@
       </form>
 
 
-      <!-- SIGNUP FORM -->
+      <!-- SIGN UP -->
 
-      <form id="signupForm">
+      <form id="signupForm" hidden>
 
         <label for="fullName">
           Full name
@@ -128,12 +116,11 @@
             id="fullName"
             name="fullName"
             type="text"
-            autocomplete="name"
             maxlength="80"
+            autocomplete="name"
             required
             placeholder="Your full name"
           >
-
         </label>
 
 
@@ -148,7 +135,6 @@
             required
             placeholder="you@example.com"
           >
-
         </label>
 
 
@@ -159,12 +145,11 @@
             id="signupPassword"
             name="password"
             type="password"
-            autocomplete="new-password"
             minlength="8"
+            autocomplete="new-password"
             required
             placeholder="At least 8 characters"
           >
-
         </label>
 
 
@@ -179,19 +164,16 @@
       </form>
 
 
-      <!-- MESSAGE -->
-
       <p
-        class="message"
         id="message"
+        class="message"
         role="status"
         aria-live="polite"
       ></p>
 
 
       <p class="tiny">
-        By using Collins Academy, you agree to use the classroom
-        respectfully and responsibly.
+        Use your own account details to access the Collins Academy classroom.
       </p>
 
     </section>
@@ -199,11 +181,9 @@
   </main>
 
 
-  <!-- IMPORTANT: cache-busting version -->
-
   <script
     type="module"
-    src="auth.js?v=4"
+    src="auth.js?v=10"
   ></script>
 
 </body>
